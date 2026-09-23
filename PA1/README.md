@@ -9,13 +9,13 @@ atributos, constructores, métodos y estructuras de control.
 
 ## Integrantes
 
-- Sherlon Lisber Serrano Garcia - Clase Producto (atributos y constructores)
+- Sherlon Lisber Serrano Garcia : Clase Producto (atributos y constructores)
 
-- Yanire Alcantara Salinas - Métodos de la clase Producto
+- Yanire Alcantara Salinas : Métodos de la clase Producto
 
-- Angelo Leonardo Fabrizio Cuadros Castillo - Menú y flujo principal (Main)
+- Angelo Leonardo Fabrizio Cuadros Castillo : Menú y flujo principal (Main)
 
-- Alvaro Carita Huaman - Pruebas, documentación y video
+- Alvaro Carita Huaman : Pruebas, documentación y video
 
 ## Instrucciones de ejecución
 
