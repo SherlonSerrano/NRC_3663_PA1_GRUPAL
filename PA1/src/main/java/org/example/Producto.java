@@ -34,4 +34,41 @@ public class Producto {
         contadorProductos++;
     }
 
+    // Método que no retorna valor
+    public void mostrarProducto(){
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Precio: S/ " + precio);
+        System.out.println("Stock: " + stock);
+    }
+
+    // Método que aumenta el stock
+    public void aumentarStock(int cantidad){
+        stock = stock + cantidad;
+    }
+
+    // Método que retorna boolean para validad stock
+    public boolean validarStock(int cantidadSolicitada){
+        return stock >= cantidadSolicitada;
+    }
+
+    // Método que reduce el stock (se usa el if-else y llama al método anterior)
+    public void reducirStock(int cantidad){
+        if (validarStock(cantidad)){
+            stock = stock - cantidad;
+            System.out.println("Venta realizada. Nuevo stock: " + stock);
+        } else {
+            System.out.println("Stock insuficiente. Stock actual: " + stock);
+        }
+    }
+
+    // Método estático que retorna valor (calcular valor de inventario)
+    public static double calcularValorInventario(double precio, int stock){
+        return precio * stock;
+    }
+
+
+
+
+
+
 }

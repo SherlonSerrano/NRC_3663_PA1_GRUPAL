@@ -16,5 +16,16 @@ public class Main {
         System.out.println(p3.nombre);  // Imprime nombre p2
         System.out.println(p3.precio);  // Imprime precio p2
         System.out.println(p3.stock);   // Imprime stock p2
+
+
+        // Verificación integrante 2
+        Producto p = new Producto("Mouse", 50, 5);
+        p.mostrarProducto();
+        p.aumentarStock(10);
+        System.out.println(p.validarStock(3));
+        p.reducirStock(20); // debe decir "Stock insuficiente"
     }
+
+
+
 }
