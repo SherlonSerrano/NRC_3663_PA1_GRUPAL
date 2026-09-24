@@ -46,5 +46,5 @@ atributos, constructores, métodos y estructuras de control.
 
 ## Video de exposición
 
-Link de Video: https://youtu.be/jc2V7DggWao
+[Ver video de exposición en YouTube] (https://youtu.be/jc2V7DggWao)
 
