@@ -17,6 +17,16 @@ atributos, constructores, métodos y estructuras de control.
 
 - Alvaro Carita Huaman : Pruebas, documentación y video
 
+## Participacion
+
+- Sherlon Lisber Serrano Garcia : 100%
+
+- Yanire Alcantara Salinas : 100%
+
+- Angelo Leonardo Fabrizio Cuadros Castillo : 100%
+
+- Alvaro Carita Huaman : 100%
+
 ## Instrucciones de ejecución
 
 1. Clonar el repositorio.
@@ -36,4 +46,5 @@ atributos, constructores, métodos y estructuras de control.
 
 ## Video de exposición
 
-Link de Video: 
+Link de Video: https://youtu.be/jc2V7DggWao
+
