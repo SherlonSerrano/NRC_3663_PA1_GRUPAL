@@ -2,78 +2,114 @@ package org.example;
 
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        // Verificamos que compila sin errores
-        Producto p1 = new Producto("PC gamer", 2500, 50);
-        Producto p2 = new Producto("Laptop", 1500, 20);
-        Producto p3 = new Producto(p2);
+        // Scanner para leer lo que el usuario escribe por consola
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println(p1.nombre);
-        System.out.println(p1.precio);
-        System.out.println(p1.stock);
-        System.out.println(p3.nombre);  // Imprime nombre p2
-        System.out.println(p3.precio);  // Imprime precio p2
-        System.out.println(p3.stock);   // Imprime stock p2
+        // Producto "activo": el único que el sistema maneja en un momento dado.
+        // Se inicializa con el constructor por defecto mientras el usuario no registre uno propio.
+        Producto producto = new Producto();
 
-
-        // Verificación integrante 2
-        Producto p = new Producto("Mouse", 50, 5);
-        p.mostrarProducto();
-        p.aumentarStock(10);
-        System.out.println(p.validarStock(3));
-        p.reducirStock(20); // debe decir "Stock insuficiente"
-
-        //Parte de integrante 3
-Scanner sc = new Scanner(System.in);
+        // Variable que guardará la opción elegida en el menú
         int opcion;
 
-        do {
-            System.out.println("Menu principal");
-            System.out.println("Registro del producto");
-            System.out.println("Mostrar productos");
-            System.out.println("Validar stock");
-            System.out.println("Salir");
-            System.out.println("Seleccione una opcion");
+        // Contador: cuenta cuántas operaciones (registrar, aumentar, vender) se realizaron
+        int operacionesRealizadas = 0;
 
+        // Acumulador: suma el valor total de lo vendido durante toda la ejecución
+        double valorTotalMovido = 0;
+
+        // Ciclo do-while: se usa porque el menú debe mostrarse al menos una vez,
+        // sin importar qué elija el usuario después
+        do {
+            System.out.println("\n===== MENÚ - CONTROL DE PRODUCTOS =====");
+            System.out.println("1. Registrar producto");
+            System.out.println("2. Mostrar información del producto");
+            System.out.println("3. Aumentar stock");
+            System.out.println("4. Vender / reducir stock");
+            System.out.println("5. Calcular valor total del inventario");
+            System.out.println("6. Salir");
+            System.out.print("Elija una opción: ");
             opcion = sc.nextInt();
 
+            // switch: evalúa la opción elegida y ejecuta el bloque correspondiente
             switch (opcion) {
 
                 case 1:
-                System.out.println("Menu principal");
-                break;
+                    // Se limpia el buffer del Scanner (queda pendiente el "Enter" del nextInt anterior)
+                    sc.nextLine();
+
+                    System.out.print("Nombre del producto: ");
+                    String nombre = sc.nextLine();
+
+                    System.out.print("Precio: ");
+                    double precio = sc.nextDouble();
+
+                    System.out.print("Stock inicial: ");
+                    int stock = sc.nextInt();
+
+                    // Se reemplaza el producto activo por uno nuevo con los datos ingresados.
+                    // El producto anterior (si existía) deja de estar accesible.
+                    producto = new Producto(nombre, precio, stock);
+
+                    System.out.println("Producto registrado correctamente.");
+                    operacionesRealizadas++; // se suma 1 al contador de operaciones
+                    break;
 
                 case 2:
-                 System.out.println("Productos");
-                    p1.mostrarProducto();
-                    p2.mostrarProducto();
-                    p.mostrarProducto();
+                    // Muestra los datos del producto activo actual
+                    producto.mostrarProducto();
                     break;
 
                 case 3:
-                      System.out.println("Validar stock");
-                    System.out.println("PC gamer: " + p1.validarStock(3));
-                    System.out.println("Laptop: " + p2.validarStock(3));
-                    System.out.println("Mouse: " + p.validarStock(3));
+                    System.out.print("Cantidad a aumentar: ");
+                    int cantidadAumentar = sc.nextInt();
+
+                    // Llama al método de la clase Producto que suma stock
+                    producto.aumentarStock(cantidadAumentar);
+                    operacionesRealizadas++;
                     break;
 
                 case 4:
-                     System.out.println("Saliendo del programa...");
+                    System.out.print("Cantidad a vender: ");
+                    int cantidadVender = sc.nextInt();
+
+                    // reducirStock ya internamente valida si hay stock suficiente (if-else)
+                    producto.reducirStock(cantidadVender);
+
+                    // Se acumula el valor de la venta, aunque no se haya podido concretar
+                    // (esto podría ajustarse para acumular solo ventas exitosas si se desea)
+                    valorTotalMovido += cantidadVender * producto.precio;
+                    operacionesRealizadas++;
                     break;
 
-                  default:
-                    System.out.println("Opcion no valida.");
+                case 5:
+                    // Método estático: se llama directamente desde la clase, no desde un objeto
+                    double valorInventario = Producto.calcularValorInventario(producto.precio, producto.stock);
+                    System.out.println("Valor total del inventario: S/ " + valorInventario);
+                    break;
+
+                case 6:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+
+                default:
+                    // Se ejecuta si el usuario ingresa una opción fuera del 1 al 6
+                    System.out.println("Opción inválida, intente nuevamente.");
             }
 
-        } while  (opcion !=4);
+        } while (opcion != 6); // el ciclo se repite hasta que el usuario elija salir
 
-        sc.close();
-                    
-                          
+        // Resumen final que se muestra una sola vez, al terminar el programa
+        System.out.println("\nOperaciones realizadas: " + operacionesRealizadas);
+        System.out.println("Valor total movido en ventas: S/ " + valorTotalMovido);
+
+        // Atributo de clase: cuenta todos los productos creados durante la ejecución,
+        // incluyendo el inicial y cada vez que se usó la opción 1
+        System.out.println("Productos creados en total: " + Producto.contadorProductos);
+
+        sc.close(); // se cierra el Scanner al finalizar
     }
-
 }
